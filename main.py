@@ -32,7 +32,7 @@ app = FastAPI(lifespan=lifespan)
 # Add CORS Middleware to allow requests from frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://dextro-sage-website.vercel.app","http://localhost:5173", "http://127.0.0.1:5173","https://dextro-sage-website-2vpm6brpb-vikrant5.vercel.app"],
+    allow_origins=["https://dextro-sage-website.vercel.app","http://localhost:5173", "http://127.0.0.1:5173","https://dextro-sage-website-amber.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
