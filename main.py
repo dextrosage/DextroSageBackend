@@ -20,9 +20,9 @@ from security.google_sheet import initialize_google_sheet
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
-    await init_indexes()
+    # await init_indexes()
     
-    await initialize_google_sheet()
+    # await initialize_google_sheet()
 
     yield
 
