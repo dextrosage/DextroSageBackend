@@ -3,7 +3,7 @@ from bson import ObjectId
 from fastapi import HTTPException
 from mongodb.collections import announcements, users
 
-async def create_announcement(title: str, content: str, author_id: str, video_links: list[str] = None):
+async def create_announcement(title: str, content: str, author_id: str, video_links: list[str] = None, image_links: list[str] = None):
     author = await users.find_one({"_id": ObjectId(author_id)})
     if not author:
         raise HTTPException(status_code=404, detail="Author not found")
@@ -15,6 +15,7 @@ async def create_announcement(title: str, content: str, author_id: str, video_li
         "author_name": author.get("name", "Admin"),
         "author_role": author.get("role", "ADMIN"),
         "video_links": video_links or [],
+        "image_links": image_links or [],
         "created_at": datetime.utcnow(),
         "updated_at": datetime.utcnow()
     }
@@ -35,11 +36,12 @@ async def get_all_announcements(skip: int = 0, limit: int = 10):
             "author_role": document.get("author_role", "ADMIN"),
             "created_at": document["created_at"].isoformat() + "Z",
             "updated_at": document["updated_at"].isoformat() + "Z",
-            "video_links": document.get("video_links", [])
+            "video_links": document.get("video_links", []),
+            "image_links": document.get("image_links", [])
         })
     return results
 
-async def update_announcement(announcement_id: str, title: str | None, content: str | None, video_links: list[str] | None = None):
+async def update_announcement(announcement_id: str, title: str | None, content: str | None, video_links: list[str] | None = None, image_links: list[str] | None = None):
     update_data = {"updated_at": datetime.utcnow()}
     if title is not None:
         update_data["title"] = title
@@ -47,6 +49,8 @@ async def update_announcement(announcement_id: str, title: str | None, content: 
         update_data["content"] = content
     if video_links is not None:
         update_data["video_links"] = video_links
+    if image_links is not None:
+        update_data["image_links"] = image_links
         
     result = await announcements.update_one(
         {"_id": ObjectId(announcement_id)},

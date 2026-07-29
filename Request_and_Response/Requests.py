@@ -60,8 +60,10 @@ class AnnouncementCreateRequest(BaseModel):
     title: str = Field(..., max_length=200)
     content: str = Field(..., max_length=50000)
     video_links: list[str] = Field(default=[])
+    image_links: list[str] = Field(default=[])
 
 class AnnouncementUpdateRequest(BaseModel):
     title: str | None = Field(None, max_length=200)
     content: str | None = Field(None, max_length=50000)
     video_links: list[str] | None = Field(None)
+    image_links: list[str] | None = Field(None)

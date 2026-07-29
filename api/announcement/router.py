@@ -33,7 +33,8 @@ async def create_new_announcement(
         title=request.title,
         content=request.content,
         author_id=payload['sub'],
-        video_links=request.video_links
+        video_links=request.video_links,
+        image_links=request.image_links
     )
     return {"status": "Announcement created"}
 
@@ -48,7 +49,8 @@ async def update_existing_announcement(
         announcement_id=announcement_id,
         title=request.title,
         content=request.content,
-        video_links=request.video_links
+        video_links=request.video_links,
+        image_links=request.image_links
     )
     return {"status": "Announcement updated"}
 
