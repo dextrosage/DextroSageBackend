@@ -84,6 +84,7 @@ class AnnouncementResponse(BaseModel):
     author_role: str
     created_at: str
     updated_at: str
+    video_links: list[str] = []
 
 class StatusResponse(BaseModel):
     status: str
