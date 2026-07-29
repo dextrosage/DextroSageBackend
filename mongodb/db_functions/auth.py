@@ -153,7 +153,7 @@ async def save_refresh_token(
         user_session = UserSession(
             session_id=session_id,
             user_id=ObjectId(user_id),
-            refreshtoken=hash_keyword(refresh_token_value),
+            refreshtoken=hash_keyword(refresh_token_value)
         )
 
         await sessions.insert_one(user_session.model_dump())

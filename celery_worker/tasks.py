@@ -36,7 +36,7 @@ def send_email(name: str, email: str, username: str, password: str):
     # Build the payload for SendGrid using plain_text_content
     message = Mail(
         # Must match your verified sender exactly
-        from_email="srijan.sarkar.u2024@iem.edu.in",
+        from_email="dextrosage.web@gmail.com",
         to_emails=email,
         subject="Welcome to our platform!",
         # Pass the plain text string here

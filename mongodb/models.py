@@ -1,4 +1,5 @@
-from datetime import datetime
+from pydantic import Field
+from datetime import UTC, datetime
 from bson import ObjectId
 from pydantic import BaseModel, ConfigDict
 
@@ -29,6 +30,7 @@ class UserSession(BaseModel):
     session_id: str
     user_id: ObjectId
     refreshtoken: str
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
 class Announcement(BaseModel):
     """System-wide announcement."""
