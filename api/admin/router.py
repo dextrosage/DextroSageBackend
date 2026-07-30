@@ -57,14 +57,19 @@ async def delete_all_sessions_of_member(payload: dict = Depends(verify_admin_acc
     }
 
 
-@router.delete("/delete/members", status_code=200, response_model=DeleteUserResponse)
-async def delete_members(payload: dict = Depends(verify_admin_access_token)):
+@router.delete("/delete/{user_id}/members", status_code=200, response_model=DeleteUserResponse)
+async def delete_members(user_id: str = Path(description="User Id"), payload: dict = Depends(verify_admin_access_token)):
     '''Deleting member and clearing session of them from db'''
+    from fastapi import HTTPException
+    
+    target_user_role = await get_user_role(user_id)
+    if target_user_role in ["ADMIN", "SADMIN"]:
+        raise HTTPException(status_code=403, detail="Admins cannot delete other Admins or Super Admins")
 
-    await delete_member_by_id(payload['sub'])
+    await delete_member_by_id(user_id)
 
     #Deleting row from google sheet
-    await delete_user_from_sheet(payload['sub'])
+    await delete_user_from_sheet(user_id)
     
     return {
         'status': 'User deleted'
