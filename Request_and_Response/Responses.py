@@ -37,6 +37,9 @@ class AdminViewResponse(BaseModel):
     phno: str
     email: str
     role: str
+    connected_users: list[str] = []
+    pending_connections: list[str] = []
+    sent_requests: list[str] = []
 
 class UserDetailsResponse(BaseModel):
     user_id: str
@@ -44,6 +47,9 @@ class UserDetailsResponse(BaseModel):
     phno: str
     email: str
     role: str
+    connected_users: list[str] = []
+    pending_connections: list[str] = []
+    sent_requests: list[str] = []
 
 class UserSessionsResponse(BaseModel):
     session_id: str
@@ -99,3 +105,35 @@ class UserCredentialsResponse(BaseModel):
     profile_required: bool
     pwd_change_required: bool
     phno: str | None = None
+
+
+class ChatMessage(BaseModel):
+    sender_id: str
+    text: str
+    timestamp: str
+
+class ChatMessagesResponse(BaseModel):
+    messages: list[ChatMessage]
+    page: int
+
+class ConnectUserResponse(BaseModel):
+    status: str
+
+class UserConnectionsResponse(BaseModel):
+    user_id: str
+    name: str
+    email: str
+    role: str
+
+class NotificationResponse(BaseModel):
+    id: str
+    user_id: str
+    content: str
+    is_read: bool
+    created_at: str
+
+class NotificationsListResponse(BaseModel):
+    notifications: list[NotificationResponse]
+
+class MarkReadResponse(BaseModel):
+    status: str
