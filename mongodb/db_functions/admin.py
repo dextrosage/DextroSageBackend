@@ -19,7 +19,10 @@ async def get_all_members(skip: int = 0, limit: int = 10):
             name=doc['name'],
             phno= doc['phno'] if 'phno' in doc else "N/A",
             email=doc['email'],
-            role=doc['role']
+            role=doc['role'],
+            connected_users=doc.get('connected_users', []),
+            pending_connections=doc.get('pending_connections', []),
+            sent_requests=doc.get('sent_requests', [])
         )
         for doc in user_result
     ]

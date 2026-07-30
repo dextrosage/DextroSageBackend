@@ -17,12 +17,15 @@ from redis_db.redis_instance import redis
 from fastapi.middleware.cors import CORSMiddleware
 
 from security.google_sheet import initialize_google_sheet
+from security.google_sheet_chat import initialize_google_sheet_chat
+from api.chat.router import router as chat_router
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     await init_indexes()
     
     await initialize_google_sheet()
+    await initialize_google_sheet_chat()
 
     yield
 
@@ -49,3 +52,6 @@ app.include_router(admin_view_router)
 app.include_router(user_view_router)
 
 app.include_router(announcement_router)
+
+app.include_router(chat_router)
+

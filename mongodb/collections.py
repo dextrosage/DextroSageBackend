@@ -7,3 +7,5 @@ sessions = database["sessions"]
 profiles = database["profiles"]
 
 announcements = database["announcements"]
+
+notifications = database["notifications"]

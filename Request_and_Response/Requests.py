@@ -67,3 +67,7 @@ class AnnouncementUpdateRequest(BaseModel):
     content: str | None = Field(None, max_length=50000)
     video_links: list[str] | None = Field(None)
     image_links: list[str] | None = Field(None)
+
+
+class ChatSendRequest(BaseModel):
+    text: str = Field(..., min_length=1)

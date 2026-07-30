@@ -22,6 +22,21 @@ class User(BaseModel):
     profile_required: bool
     
     pwd_change_required: bool
+    
+    connected_users: list[str] = []
+    
+    pending_connections: list[str] = []
+    
+    sent_requests: list[str] = []
+
+class Notification(BaseModel):
+    """User notification."""
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    user_id: str
+    content: str
+    is_read: bool = False
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
 class UserSession(BaseModel):
     """Stored refresh-token hash for a login session."""
