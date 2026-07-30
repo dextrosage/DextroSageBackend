@@ -48,18 +48,7 @@ async def delete_own_all_sessions_of_user(payload: dict = Depends(verify_user_ac
     }
 
 
-@router.delete("/delete/user/", status_code=200, response_model=DeleteUserResponse)
-async def delete_own_user(payload: dict = Depends(verify_user_access_token)):
-    '''Deleting member and clearing session of them from db'''
 
-    await delete_member_by_id(payload['sub'])
-
-    # Deleting row from google sheet
-    await delete_user_from_sheet(payload['sub'])
-
-    return {
-        'status': 'User deleted'
-    }
 
 # Own Profile get
 
