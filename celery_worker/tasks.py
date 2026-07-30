@@ -220,9 +220,9 @@ If the button doesn't work, copy and paste this link into your browser:
 
 <p style="word-break:break-all;">
 <a
-href="https://dextro-sage-website.vercel.app/login"
+href="https://dextro-sage-website-amber.vercel.app/login"
 style="color:#2563eb;">
-https://dextro-sage-website.vercel.app/login
+https://dextro-sage-website-amber.vercel.app/login
 </a>
 </p>
 
@@ -281,7 +281,7 @@ def send_email_smtp(name: str, email: str, username: str, password: str):
     smtp_port = int(os.getenv("SMTP_PORT"))
     smtp_email = os.getenv("SMTP_USER")
     smtp_pwd = os.getenv("SMTP_PASSWORD")
-
+    
     # Build the payload for SendGrid using plain_text_content
     message = create_message_for_smtp(
         name,
